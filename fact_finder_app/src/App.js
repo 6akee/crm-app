@@ -9,6 +9,14 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        <div className="Search-box">
+          <input
+            type="text"
+            placeholder="Enter Movie or Show name"
+            className="Search-input"
+          />
+          <button className="Search-button">Search</button>
+        </div>
         <a
           className="App-link"
           href="https://reactjs.org"
