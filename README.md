@@ -1,3 +1,3 @@
-# realtime-chat-app
+# CRM application with django
 
 
