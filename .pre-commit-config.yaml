@@ -1,0 +1,83 @@
+---
+repos:
+    - repo: https://github.com/pre-commit/pre-commit-hooks
+      rev: v4.4.0
+      hooks:
+          - id: trailing-whitespace # убирает лишние пробелы
+          - id: end-of-file-fixer # добавляет пустую строку в конце файла
+            exclude: ^(README\.md|docker-compose\.yml)$
+          - id: check-json # проверяет синтаксис .json файлов
+          - id: check-case-conflict # проверяет файлы, которые могут конфликтовать в файловых системах без учета регистра.
+          - id: check-merge-conflict # проверяет файлы, содержащие конфликтные строки слияния.
+
+# Сортирует импорты в проекте
+    - repo: https://github.com/pycqa/isort
+      rev: 5.12.0
+      hooks:
+          - id: isort
+            exclude: '(migrations)/.*|__init__.py'
+            args: [--profile, black, --filter-files]
+
+# Обновляет синтаксис Python кода в соответствии с последними версиями
+    - repo: https://github.com/asottile/pyupgrade
+      rev: v3.10.1
+      hooks:
+          - id: pyupgrade
+            exclude: '(migrations)/.*|__init__.py'
+            args: [--py311-plus]
+
+# Форматирует код под PEP8
+    - repo: https://github.com/PyCQA/autoflake
+      rev: v2.2.0
+      hooks:
+          - id: autoflake
+            exclude: '(migrations)/.*|__init__.py'
+
+# Сканер стилистических ошибок, нарушающие договоренности PEP8
+    - repo: https://github.com/PyCQA/flake8
+      rev: 6.1.0
+      hooks:
+          - id: flake8
+            exclude: '(migrations)/.*|__init__.py'
+            args:
+              - --max-line-length=120
+              - --ignore=E203, W503
+
+# Проверка статических типов с помощью mypy
+    - repo: https://github.com/pre-commit/mirrors-mypy
+      rev: v1.5.1
+      hooks:
+          - id: mypy
+            language_version: python3.11
+            exclude: '(migrations)/.*|__init__.py'
+            args: [--ignore-missing-imports, --check-untyped-defs]
+
+              # Форматирует код под PEP8 c помощью black
+    - repo: https://github.com/psf/black
+      rev: 23.7.0
+      hooks:
+          - id: black
+            language_version: python3.11
+            exclude: '(migrations)/.*|__init__.py'
+            args: [-l 120]
+
+    - repo: https://github.com/pre-commit/pygrep-hooks
+      rev: v1.10.0
+      hooks:
+
+#          - id: python-check-blanket-type-ignore # Обеспечьте, чтобы аннотации `# type: ignore` всегда встречались с определенными кодами.
+          - id: python-use-type-annotations # Обеспечьте использование аннотаций типа python3.6+ вместо комментариев типа.
+            exclude: '(migrations)/.*|__init__.py'
+
+    - repo: https://github.com/asottile/yesqa
+      rev: v1.5.0
+      hooks:
+          - id: yesqa # Автоматически удаляет ненужные комментарии `#noqa`.
+            exclude: '(migrations)/.*|__init__.py'
+
+
+    - repo: https://github.com/MarcoGorelli/absolufy-imports
+      rev: v0.3.1
+      hooks:
+          - id: absolufy-imports
+            exclude: '(migrations)/.*|__init__.py'
