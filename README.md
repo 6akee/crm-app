@@ -37,4 +37,4 @@ pre-commit run --all-files
 
 ## Presentation
 
-![](https://github.com/6akee/crm-app/project.gif)
+![](https://github.com/6akee/crm-app/blob/main/project.gif)
